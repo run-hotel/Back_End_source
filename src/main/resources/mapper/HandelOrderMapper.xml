@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.HandelOrderMapper">
+    <insert id="insertHandel" parameterType="com.air.airtest.entity.Handel">
+      INSERT INTO handel
+      VALUES(#{hotelstaffno},#{orderno},#{roomno},#{handeldate} )
+    </insert>
+    <select id="selectHandelRoomNo" resultType="String">
+      SELECT roomno
+      FROM handel
+      WHERE orderno = #{orderno}
+    </select>
+    <select id="selectHandelOrder" resultType="com.air.airtest.vo.Hotelvo">
+      SELECT roomorder.orderno,handel.roomno,roomorder.customerphone,roomorder.inttime,roomorder.Roomtypename,roomorder.Orderstatus,roomorder.outtime
+      FROM handel,roomorder
+      where roomorder.orderno = handel.orderno AND hotelstaffno = #{hotelstaffno}
+    </select>
+</mapper>

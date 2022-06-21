@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.RoomTypeMapper">
+    <!-- 用户下订单时，房间状态改为维修时 房间可用数量减1 -->
+    <update id="updateRoomNumForReduce">
+        UPDATE roomtype
+        SET roomnumber= roomnumber - 1
+        WHERE roomtypeno = #{roomtypeno}
+    </update>
+    <!-- 用户退房时，房间状态改为空闲时 房间可用数量加1 -->
+    <update id="updateRoomNumForAdd">
+      UPDATE roomtype
+      SET roomnumber= roomnumber + 1
+      WHERE roomtypeno = #{roomtypeno}
+    </update>
+    <update id="updateRoomPrice">
+      UPDATE roomtype
+      set roomprice = #{roomprice}
+      WHERE roomtypeno = #{roomtypeno}
+    </update>
+    <select id="selectRoomType" resultType="com.air.airtest.entity.RoomType">
+      SELECT *
+      FROM roomtype
+    </select>
+    <!-- 通过房间类型名找到房间类型编号 -->
+    <select id="selectRoomTypeNoforRoomType" resultType="String">
+      SELECT roomtypeno
+      from roomtype
+      WHERE roomtypename = #{roomtypename} 
+    </select>
+
+</mapper>

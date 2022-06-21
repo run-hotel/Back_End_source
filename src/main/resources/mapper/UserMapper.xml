@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.UserMapper">
+    <insert id="insertUser" parameterType="com.air.airtest.entity.User">
+        insert into user(username,nickname,age,sex,address) values(#{username},#{nickname},#{age},#{sex},#{address})
+    </insert>
+    <select id="selectUser" resultType="com.air.airtest.entity.User">
+      select * from user where id = #{id}
+    </select>
+</mapper>

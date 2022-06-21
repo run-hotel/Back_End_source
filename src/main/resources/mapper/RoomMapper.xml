@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.RoomMapper">
+<!-- resultType="com.air.airtest.entity.RoomInfo" -->
+    <select id="selectRoomTypeNo" resultType="String">
+      SELECT roomtypeno
+      from room
+      WHERE roomno = #{roomno} 
+    </select>
+    <!-- 变居住 -> 处理订单时-->
+    <update id="updateRoomStatus">
+      UPDATE room
+      SET roomstatus = 0
+      WHERE roomno = #{roomno}
+    </update>
+    <!-- 变维修 ->改变房间状态 -->
+    <update id="updateStatusForRepair">
+      UPDATE room
+      SET roomstatus = 2
+      WHERE roomno = #{roomno}
+    </update>
+    <!-- 变空闲 ->改变房间状态 -->
+    <update id="updateStatusForLive">
+      UPDATE room
+      SET roomstatus = 1
+      WHERE roomno = #{roomno}
+    </update>
+    <!-- 查出当前房间剩余房间 -->
+    <select id="selectRemainingRooms" resultType="com.air.airtest.vo.Hotelvo">
+      select RoomNo
+      FROM room
+      WHERE RoomTypeNo=#{roomtypeno} AND RoomStatus= 1
+    </select>
+    <!--  -->
+    
+</mapper>

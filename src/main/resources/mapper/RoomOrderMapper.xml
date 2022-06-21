@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.RoomOrderMapper">
+    <select id="selectRoomOrderInfo" resultType="com.air.airtest.entity.RoomOrderInfo">
+        select * from roomorder
+    </select>
+    <update id="updateOrderStatus">
+      UPDATE roomorder
+      set orderstatus = 0
+      where orderno = #{orderno}
+    </update>
+    <update id="updateOrderStatusForCancel">
+      UPDATE roomorder
+      set orderstatus = 2
+      where orderno = #{orderno}
+    </update>
+    <select id="selectRoomOrderone" resultType="com.air.airtest.entity.RoomOrderInfo">
+      select * from roomorder where orderno = #{orderno}
+    </select>
+    <select id="selectRoomForPeople" resultType="com.air.airtest.vo.Hotelvo">
+      SELECT roomorder.CustomerPhone,roomorder.OrderStatus,roomorder.inttime,roomorder.outtime,roomorder.orderno
+      FROM handel,roomorder
+      WHERE handel.OrderNo = roomorder.OrderNo AND handel.roomno = #{roomno}
+    </select>
+    <insert id="addOrder" parameterType="com.air.airtest.entity.RoomOrderInfo">
+      INSERT INTO roomorder
+      VALUES(#{orderno},#{customerphone},#{inttime},#{outtime},#{roomtypename},#{orderstatus});
+    </insert>
+    <select id="selectOrder" resultType="com.air.airtest.entity.RoomOrderInfo">
+      select * from roomorder where customerphone = #{customerphone}
+    </select>
+    <select id="salesVolumes" resultType="com.air.airtest.vo.Hotelvo">
+      select RoomTypeName,count(*) Salesvolumes
+      from roomorder 
+      GROUP BY RoomTypeName having count(*)>0
+    </select>
+
+</mapper>

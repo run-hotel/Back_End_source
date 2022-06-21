@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.CustomerMapper">
+    <select id="getInfo" resultType="com.air.airtest.entity.Customer">
+        SELECT * FROM customer WHERE customerphone = #{customerphone}
+    </select>
+    <update id="updateCustomerInfo">
+      UPDATE customer 
+      SET customersex = #{customersex}, customername =  #{customername}, customerid =  #{customerid} 
+      WHERE customerphone =  #{customerphone}
+    </update>
+    <!-- <update id="updateCustomerInfo">
+      UPDATE customer
+      set CustomerName = 'wewewewew',CustomerID = '12121212',CustomerSex='1'
+      where CustomerPhone = '1'
+    </update> -->
+</mapper>
