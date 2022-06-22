@@ -1,4 +1,194 @@
--- 用于增加一些表的内容
+/*
+酒店管理系统的建表操作
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for 酒店的消费者
+-- ----------------------------
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer`  (
+  `CustomerPhone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `CustomerPassword` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `CustomerName` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `CustomerID` char(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `CustomerSex` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`CustomerPhone`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer
+-- ----------------------------
+INSERT INTO `customer` VALUES ('12345654321', 'wewewe', '一条小团团', '12121212121', '1');
+INSERT INTO `customer` VALUES ('12345678901', '123456', '张四', '123456789123456789', '1');
+INSERT INTO `customer` VALUES ('12345678902', '2345678', '李四', '123456789987654321', '1');
+INSERT INTO `customer` VALUES ('12345678904', 'qwqwqw', '测试员3', '123456789012345678', NULL);
+INSERT INTO `customer` VALUES ('13643302615', 'wuwuwu', '测试员', NULL, NULL);
+INSERT INTO `customer` VALUES ('15032145680', '732zhao', '赵六', '130132456789045671', '0');
+INSERT INTO `customer` VALUES ('15032168451', '523wang', '王五', '130132200010262856', '0');
+INSERT INTO `customer` VALUES ('15075100853', '527wu', '吴迪呀', '130132200110157896', '1');
+INSERT INTO `customer` VALUES ('15075100888', 'weweewe', '二狗字', '15012121212120121', '0');
+
+-- ----------------------------
+-- Table structure for handel
+-- ----------------------------
+DROP TABLE IF EXISTS `handel`;
+CREATE TABLE `handel`  (
+  `HotelStaffNo` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `OrderNo` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `RoomNo` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Handeldate` date NOT NULL,
+  PRIMARY KEY (`HotelStaffNo`, `OrderNo`, `RoomNo`) USING BTREE,
+  INDEX `FK_handel`(`RoomNo`) USING BTREE,
+  INDEX `FK_handel3`(`OrderNo`) USING BTREE,
+  CONSTRAINT `handel_ibfk_1` FOREIGN KEY (`RoomNo`) REFERENCES `room` (`RoomNo`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `handel_ibfk_2` FOREIGN KEY (`HotelStaffNo`) REFERENCES `hotelstaff` (`HotelStaffNo`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `handel_ibfk_3` FOREIGN KEY (`OrderNo`) REFERENCES `roomorder` (`OrderNo`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of handel
+-- ----------------------------
+INSERT INTO `handel` VALUES ('12345', 'JD01', '1001', '2022-05-24');
+INSERT INTO `handel` VALUES ('12345', 'JD010', '4003', '2022-05-27');
+INSERT INTO `handel` VALUES ('12345', 'JD07', '4002', '2022-05-27');
+INSERT INTO `handel` VALUES ('12345', 'JD09', '4001', '2022-05-24');
+INSERT INTO `handel` VALUES ('JD001', 'JD011', '3001', '2022-05-26');
+INSERT INTO `handel` VALUES ('JD001', 'JD03', '1002', '2022-05-18');
+INSERT INTO `handel` VALUES ('JD001', 'JD05', '2001', '2022-05-03');
+
+-- ----------------------------
+-- Table structure for 酒店前台
+-- ----------------------------
+DROP TABLE IF EXISTS `hotelstaff`;
+CREATE TABLE `hotelstaff`  (
+  `HotelStaffNo` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `HotelStaffPassword` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `HotelStaffName` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `HotelStaffSex` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `HotelStaffPhone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`HotelStaffNo`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of hotelstaff
+-- ----------------------------
+INSERT INTO `hotelstaff` VALUES ('12345', '1234567', '员工刘', '1', '15075100853');
+INSERT INTO `hotelstaff` VALUES ('JD001', 'JD12345678', '员工赵', '1', '15075100259');
+INSERT INTO `hotelstaff` VALUES ('JD002', 'JD23456789', '员工周', '0', '15204521075');
+INSERT INTO `hotelstaff` VALUES ('JD003', 'JD1015wu', '员工吴', '1', '15702254852');
+
+-- ----------------------------
+-- Table structure for 酒店的房间
+-- ----------------------------
+DROP TABLE IF EXISTS `room`;
+CREATE TABLE `room`  (
+  `RoomNo` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `RoomTypeNo` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `RoomStatus` int NOT NULL,
+  `RoomFloor` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`RoomNo`) USING BTREE,
+  INDEX `FK_have`(`RoomTypeNo`) USING BTREE,
+  CONSTRAINT `room_ibfk_1` FOREIGN KEY (`RoomTypeNo`) REFERENCES `roomtype` (`RoomTypeNo`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of room
+-- ----------------------------
+INSERT INTO `room` VALUES ('1001', '001', 0, '一楼东');
+INSERT INTO `room` VALUES ('1002', '001', 1, '一楼西');
+INSERT INTO `room` VALUES ('1003', '001', 1, '一楼北');
+INSERT INTO `room` VALUES ('2001', '002', 1, '二楼东');
+INSERT INTO `room` VALUES ('2002', '002', 1, '二楼西');
+INSERT INTO `room` VALUES ('2003', '002', 1, '二楼北');
+INSERT INTO `room` VALUES ('3001', '003', 0, '三楼东');
+INSERT INTO `room` VALUES ('3002', '003', 1, '三楼西');
+INSERT INTO `room` VALUES ('3003', '003', 1, '三楼北');
+INSERT INTO `room` VALUES ('4001', '004', 0, '四楼东');
+INSERT INTO `room` VALUES ('4002', '004', 1, '四楼西');
+INSERT INTO `room` VALUES ('4003', '004', 0, '四楼北');
+
+-- ----------------------------
+-- Table structure for 已经预定的客房
+-- ----------------------------
+DROP TABLE IF EXISTS `roomorder`;
+CREATE TABLE `roomorder`  (
+  `OrderNo` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `CustomerPhone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `inttime` date NOT NULL,
+  `outtime` date NOT NULL,
+  `RoomTypeName` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `OrderStatus` int NULL DEFAULT NULL,
+  PRIMARY KEY (`OrderNo`) USING BTREE,
+  INDEX `FK_place`(`CustomerPhone`) USING BTREE,
+  CONSTRAINT `roomorder_ibfk_1` FOREIGN KEY (`CustomerPhone`) REFERENCES `customer` (`CustomerPhone`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of roomorder
+-- ----------------------------
+INSERT INTO `roomorder` VALUES ('JD01', '12345654321', '2022-05-24', '2022-05-25', '单人房', 0);
+INSERT INTO `roomorder` VALUES ('JD010', '12345654321', '2022-05-31', '2022-06-02', '豪华房', 0);
+INSERT INTO `roomorder` VALUES ('JD011', '15032145680', '2022-05-26', '2022-05-27', '大床房', 0);
+INSERT INTO `roomorder` VALUES ('JD02', '12345678901', '2022-05-25', '2022-05-26', '单人房', 1);
+INSERT INTO `roomorder` VALUES ('JD03', '12345654321', '2022-05-18', '2022-05-19', '单人房', 2);
+INSERT INTO `roomorder` VALUES ('JD04', '12345678901', '2022-05-27', '2022-05-28', '单人房', 1);
+INSERT INTO `roomorder` VALUES ('JD05', '12345678902', '2022-05-03', '2022-05-04', '双人房', 2);
+INSERT INTO `roomorder` VALUES ('JD06', '15075100888', '2022-06-01', '2022-06-02', '双人房', 1);
+INSERT INTO `roomorder` VALUES ('JD07', '12345678904', '2022-06-02', '2022-06-03', '豪华房', 2);
+INSERT INTO `roomorder` VALUES ('JD08', '15075100853', '2022-05-31', '2022-06-01', '大床房', 1);
+INSERT INTO `roomorder` VALUES ('JD09', '15032168451', '2022-05-24', '2022-05-26', '豪华房', 0);
+
+-- ----------------------------
+-- Table structure for 酒店房间的类型
+-- ----------------------------
+DROP TABLE IF EXISTS `roomtype`;
+CREATE TABLE `roomtype`  (
+  `RoomTypeNo` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `RoomTypeName` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `RoomNumber` int NOT NULL,
+  `RoomPrice` float(5, 2) NOT NULL,
+  PRIMARY KEY (`RoomTypeNo`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of roomtype
+-- ----------------------------
+INSERT INTO `roomtype` VALUES ('001', '单人房', 0, 110.00);
+INSERT INTO `roomtype` VALUES ('002', '双人房', 2, 200.00);
+INSERT INTO `roomtype` VALUES ('003', '大床房', 1, 180.00);
+INSERT INTO `roomtype` VALUES ('004', '豪华房', 1, 400.00);
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `age` int NULL DEFAULT NULL,
+  `sex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, '1', '1', '1', 1, '1', '1');
+INSERT INTO `user` VALUES (2, '1', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` VALUES (3, '1', NULL, '1', 1, '男', '1');
+INSERT INTO `user` VALUES (4, '2', NULL, '2', 2, '女', '2');
+INSERT INTO `user` VALUES (5, '1', NULL, '2', 3, '4', '5');
+INSERT INTO `user` VALUES (6, '123', NULL, '1', 1, '男', '1');
+INSERT INTO `user` VALUES (7, '吴浦凡', NULL, '吴迪伢', 21, '男', '河北省');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 -- ----------------------------
 -- Table structure for 酒店的客服
 -- ----------------------------
