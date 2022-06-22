@@ -15,24 +15,25 @@ CREATE TABLE `customer`  (
   `CustomerName` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `CustomerID` char(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `CustomerSex` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `CustomerAge` char(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`CustomerPhone`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO `customer` VALUES ('12345654321', 'wewewe', '一条小团团', '12121212121', '1');
-INSERT INTO `customer` VALUES ('12345678901', '123456', '张四', '123456789123456789', '1');
-INSERT INTO `customer` VALUES ('12345678902', '2345678', '李四', '123456789987654321', '1');
-INSERT INTO `customer` VALUES ('12345678904', 'qwqwqw', '测试员3', '123456789012345678', NULL);
+INSERT INTO `customer` VALUES ('12345654321', 'wewewe', '一条小团团', '12121212121', '1','20');
+INSERT INTO `customer` VALUES ('12345678901', '123456', '张四', '123456789123456789', '1','21');
+INSERT INTO `customer` VALUES ('12345678902', '2345678', '李四', '123456789987654321', '1','22');
+INSERT INTO `customer` VALUES ('12345678904', 'qwqwqw', '测试员3', '123456789012345678', NULL,'22');
 INSERT INTO `customer` VALUES ('13643302615', 'wuwuwu', '测试员', NULL, NULL);
-INSERT INTO `customer` VALUES ('15032145680', '732zhao', '赵六', '130132456789045671', '0');
-INSERT INTO `customer` VALUES ('15032168451', '523wang', '王五', '130132200010262856', '0');
-INSERT INTO `customer` VALUES ('15075100853', '527wu', '吴迪呀', '130132200110157896', '1');
-INSERT INTO `customer` VALUES ('15075100888', 'weweewe', '二狗字', '15012121212120121', '0');
+INSERT INTO `customer` VALUES ('15032145680', '732zhao', '赵六', '130132456789045671', '0','21');
+INSERT INTO `customer` VALUES ('15032168451', '523wang', '王五', '130132200010262856', '0','65');
+INSERT INTO `customer` VALUES ('15075100853', '527wu', '吴迪呀', '130132200110157896', '1','34');
+INSERT INTO `customer` VALUES ('15075100888', 'weweewe', '二狗字', '15012121212120121', '0','43');
 
 -- ----------------------------
--- Table structure for handel
+-- Table structure for handel(???)
 -- ----------------------------
 DROP TABLE IF EXISTS `handel`;
 CREATE TABLE `handel`  (
@@ -111,7 +112,7 @@ INSERT INTO `room` VALUES ('4002', '004', 1, '四楼西');
 INSERT INTO `room` VALUES ('4003', '004', 0, '四楼北');
 
 -- ----------------------------
--- Table structure for 已经预定的客房
+-- Table structure for 已经预定的客房(???)
 -- ----------------------------
 DROP TABLE IF EXISTS `roomorder`;
 CREATE TABLE `roomorder`  (
@@ -142,7 +143,7 @@ INSERT INTO `roomorder` VALUES ('JD08', '15075100853', '2022-05-31', '2022-06-01
 INSERT INTO `roomorder` VALUES ('JD09', '15032168451', '2022-05-24', '2022-05-26', '豪华房', 0);
 
 -- ----------------------------
--- Table structure for 酒店房间的类型
+-- Table structure for 酒店房间的类型(???)
 -- ----------------------------
 DROP TABLE IF EXISTS `roomtype`;
 CREATE TABLE `roomtype`  (
@@ -162,7 +163,7 @@ INSERT INTO `roomtype` VALUES ('003', '大床房', 1, 180.00);
 INSERT INTO `roomtype` VALUES ('004', '豪华房', 1, 400.00);
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for user(???)
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
@@ -209,22 +210,16 @@ INSERT INTO `hotel_customer_service` VALUES ('JD003', 'JD1015wu', '客服吴', '
 
 
 -- ----------------------------
--- Table structure for 酒店的管理员
+-- Table structure for 酒店的管理员(只能有一个)
 -- ----------------------------
 DROP TABLE IF EXISTS `hoteladministrator`;
 CREATE TABLE `hoteladministrator` (
   `hoteladministratorNo` char(5) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
   `hoteladministratorPassword` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `hoteladministratorName` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `hoteladministratorSex` char(1) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `hoteladministratorPhone` char(11) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`hoteladministratorNo`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
-INSERT INTO `hoteladministrator` VALUES ('123', '123', '管理员王', '1', '15075100853');
-INSERT INTO `hoteladministrator` VALUES ('JD001', 'JD12345678', '管理员赵', '1', '15075100259');
-INSERT INTO `hoteladministrator` VALUES ('JD002', 'JD23456789', '管理员周', '0', '15204521075');
-INSERT INTO `hoteladministrator` VALUES ('JD003', 'JD1015wu', '管理员吴', '1', '15702254852');
+INSERT INTO `hoteladministrator` VALUES ('123', '123');
 
 
 -- ----------------------------
@@ -265,7 +260,7 @@ INSERT INTO `hotel_finance_staff` VALUES ('JD002', 'JD23456789', '财务部周',
 INSERT INTO `hotel_finance_staff` VALUES ('JD003', 'JD1015wu', '财务部吴', '1', '15702254852');
 
 -- ----------------------------
--- Table structure for 客房维修信息
+-- Table structure for 客房维修信息(维修工单)
 -- ----------------------------
 DROP TABLE IF EXISTS `maintenance_information`;
 CREATE TABLE `maintenance_information` (
@@ -283,20 +278,20 @@ INSERT INTO `maintenance_information` VALUES ('1004', '123', '文档小子太少
 
 
 -- ----------------------------
--- Table structure for 报账信息
+-- Table structure for 报账信息(财务工单）
 -- ----------------------------
 DROP TABLE IF EXISTS `guarantee_information`;
 CREATE TABLE `guarantee_information` (
-  `guarantee_type` char(10) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 报账人员类型
+  `guarantee_type` char(10) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 报账类型
   `guarantee_information_content` char(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 报账内容
   `guarantee_information_costs` int NOT NULL -- 报账金额
 );
 
-INSERT INTO `guarantee_information` VALUES ('维修师傅', '修空调', '100');
-INSERT INTO `guarantee_information` VALUES ('维修师傅', '冲网费', '10');
-INSERT INTO `guarantee_information` VALUES ('维修师傅', '换组员', '11000');
-INSERT INTO `guarantee_information` VALUES ('维修师傅', '买皮肤', '100000000');
-
+INSERT INTO `guarantee_information` VALUES ('维修', '修空调', '100');
+INSERT INTO `guarantee_information` VALUES ('维修', '冲网费', '10');
+INSERT INTO `guarantee_information` VALUES ('维修', '换组员', '11000');
+INSERT INTO `guarantee_information` VALUES ('维修', '买皮肤', '100000000');
+INSERT INTO `guarantee_information` VALUES ('入住', '大床房一晚', '1000');
 
 
 -- ----------------------------
@@ -304,13 +299,14 @@ INSERT INTO `guarantee_information` VALUES ('维修师傅', '买皮肤', '100000
 -- ----------------------------
 DROP TABLE IF EXISTS `Feedback`;
 CREATE TABLE `Feedback` (
+  `servicerid` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 客服id
   `customerid` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 反馈消费者id
   `Feedback_content` char(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 反馈内容
   `Feedback_date` date NOT NULL -- 反馈时间
 );
 
-INSERT INTO `Feedback` VALUES ('12345654321', '空调太垃圾了', '2022-05-24');
-INSERT INTO `Feedback` VALUES ('12345654321', '组员太摆了', '2022-05-24');
-INSERT INTO `Feedback` VALUES ('12345654321', '上号太多了', '2022-05-24');
-INSERT INTO `Feedback` VALUES ('12345654321', '怎么酒店不能上网，，我的评价是不如网吧', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('JD001','12345654321', '空调太垃圾了', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('JD002','12345654321', '组员太摆了', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('JD003','12345654321', '上号太多了', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('123','12345654321', '怎么酒店不能上网，，我的评价是不如网吧', '2022-05-24');
 
