@@ -1,0 +1,126 @@
+-- 用于增加一些表的内容
+-- ----------------------------
+-- Table structure for 酒店的客服
+-- ----------------------------
+DROP TABLE IF EXISTS `hotel_customer_service`;
+CREATE TABLE `hotel_customer_service` (
+  `hotel_customer_serviceNo` char(5) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_customer_servicePassword` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_customer_serviceName` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_customer_serviceSex` char(1) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_customer_servicePhone` char(11) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`hotel_customer_serviceNo`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `hotel_customer_service` VALUES ('123', '123', '客服王', '1', '15075100853');
+INSERT INTO `hotel_customer_service` VALUES ('JD001', 'JD12345678', '客服赵', '1', '15075100259');
+INSERT INTO `hotel_customer_service` VALUES ('JD002', 'JD23456789', '客服周', '0', '15204521075');
+INSERT INTO `hotel_customer_service` VALUES ('JD003', 'JD1015wu', '客服吴', '1', '15702254852');
+
+
+-- ----------------------------
+-- Table structure for 酒店的管理员
+-- ----------------------------
+DROP TABLE IF EXISTS `hoteladministrator`;
+CREATE TABLE `hoteladministrator` (
+  `hoteladministratorNo` char(5) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hoteladministratorPassword` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hoteladministratorName` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hoteladministratorSex` char(1) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hoteladministratorPhone` char(11) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`hoteladministratorNo`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `hoteladministrator` VALUES ('123', '123', '管理员王', '1', '15075100853');
+INSERT INTO `hoteladministrator` VALUES ('JD001', 'JD12345678', '管理员赵', '1', '15075100259');
+INSERT INTO `hoteladministrator` VALUES ('JD002', 'JD23456789', '管理员周', '0', '15204521075');
+INSERT INTO `hoteladministrator` VALUES ('JD003', 'JD1015wu', '管理员吴', '1', '15702254852');
+
+
+-- ----------------------------
+-- Table structure for 酒店的维修人员
+-- ----------------------------
+DROP TABLE IF EXISTS `hotel_maintenance_staff`;
+CREATE TABLE `hotel_maintenance_staff` (
+  `hotel_maintenance_staffNo` char(5) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_maintenance_staffPassword` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_maintenance_staffName` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_maintenance_staffSex` char(1) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_maintenance_staffPhone` char(11) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`hotel_maintenance_staffNo`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `hotel_maintenance_staff` VALUES ('123', '123', '维修人员王', '1', '15075100853');
+INSERT INTO `hotel_maintenance_staff` VALUES ('JD001', 'JD12345678', '维修人员赵', '1', '15075100259');
+INSERT INTO `hotel_maintenance_staff` VALUES ('JD002', 'JD23456789', '维修人员周', '0', '15204521075');
+INSERT INTO `hotel_maintenance_staff` VALUES ('JD003', 'JD1015wu', '维修人员吴', '1', '15702254852');
+
+
+-- ----------------------------
+-- Table structure for 酒店的财务人员信息
+-- ----------------------------
+DROP TABLE IF EXISTS `hotel_finance_staff`;
+CREATE TABLE `hotel_finance_staff` (
+  `hotel_finance_staffNo` char(5) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_finance_staffPassword` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_finance_staffName` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_finance_staffSex` char(1) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `hotel_finance_staffPhone` char(11) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`hotel_finance_staffNo`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `hotel_finance_staff` VALUES ('123', '123', '财务部王', '1', '15075100853');
+INSERT INTO `hotel_finance_staff` VALUES ('JD001', 'JD12345678', '财务部赵', '1', '15075100259');
+INSERT INTO `hotel_finance_staff` VALUES ('JD002', 'JD23456789', '财务部周', '0', '15204521075');
+INSERT INTO `hotel_finance_staff` VALUES ('JD003', 'JD1015wu', '财务部吴', '1', '15702254852');
+
+-- ----------------------------
+-- Table structure for 客房维修信息
+-- ----------------------------
+DROP TABLE IF EXISTS `maintenance_information`;
+CREATE TABLE `maintenance_information` (
+  `RoomNo` char(5) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 维修的客房的id
+  `hotel_maintenance_staffNo` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 酒店人员的id
+  `Repair_content` char(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 维修内容
+  `Maintenance_costs` int NOT NULL, -- 维修费用
+  PRIMARY KEY (`RoomNo`, `hotel_maintenance_staffNo`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `maintenance_information` VALUES ('1001', '123', '电视坏了', '100');
+INSERT INTO `maintenance_information` VALUES ('1002', '123', '空调坏了', '10');
+INSERT INTO `maintenance_information` VALUES ('1003', '123', '酒店太垃圾了', '11000');
+INSERT INTO `maintenance_information` VALUES ('1004', '123', '文档小子太少了', '100000000');
+
+
+-- ----------------------------
+-- Table structure for 报账信息
+-- ----------------------------
+DROP TABLE IF EXISTS `guarantee_information`;
+CREATE TABLE `guarantee_information` (
+  `guarantee_type` char(10) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 报账人员类型
+  `guarantee_information_content` char(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 报账内容
+  `guarantee_information_costs` int NOT NULL -- 报账金额
+);
+
+INSERT INTO `guarantee_information` VALUES ('维修师傅', '修空调', '100');
+INSERT INTO `guarantee_information` VALUES ('维修师傅', '冲网费', '10');
+INSERT INTO `guarantee_information` VALUES ('维修师傅', '换组员', '11000');
+INSERT INTO `guarantee_information` VALUES ('维修师傅', '买皮肤', '100000000');
+
+
+
+-- ----------------------------
+-- Table structure for 消费者反馈内容
+-- ----------------------------
+DROP TABLE IF EXISTS `Feedback`;
+CREATE TABLE `Feedback` (
+  `customerid` char(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 反馈消费者id
+  `Feedback_content` char(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL, -- 反馈内容
+  `Feedback_date` date NOT NULL -- 反馈时间
+);
+
+INSERT INTO `Feedback` VALUES ('12345654321', '空调太垃圾了', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('12345654321', '组员太摆了', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('12345654321', '上号太多了', '2022-05-24');
+INSERT INTO `Feedback` VALUES ('12345654321', '怎么酒店不能上网，，我的评价是不如网吧', '2022-05-24');
+
