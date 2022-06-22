@@ -1,5 +1,7 @@
 server:
-  port: 8090
+  port: 8090 # 端口号
+  servlet:
+    context-path: /Back_End_source # 项目名
 spring:
   #数据库连接配置
   datasource:
