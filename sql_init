@@ -131,17 +131,17 @@ CREATE TABLE `roomorder`  (
 -- ----------------------------
 -- Records of roomorder
 -- ----------------------------
-INSERT INTO `roomorder` VALUES ('JD01', '12345654321', '2022-05-24', '2022-05-25', '单人房', 0);
-INSERT INTO `roomorder` VALUES ('JD010', '12345654321', '2022-05-31', '2022-06-02', '豪华房', 0);
-INSERT INTO `roomorder` VALUES ('JD011', '15032145680', '2022-05-26', '2022-05-27', '大床房', 0);
-INSERT INTO `roomorder` VALUES ('JD02', '12345678901', '2022-05-25', '2022-05-26', '单人房', 1);
-INSERT INTO `roomorder` VALUES ('JD03', '12345654321', '2022-05-18', '2022-05-19', '单人房', 2);
-INSERT INTO `roomorder` VALUES ('JD04', '12345678901', '2022-05-27', '2022-05-28', '单人房', 1);
-INSERT INTO `roomorder` VALUES ('JD05', '12345678902', '2022-05-03', '2022-05-04', '双人房', 2);
-INSERT INTO `roomorder` VALUES ('JD06', '15075100888', '2022-06-01', '2022-06-02', '双人房', 1);
-INSERT INTO `roomorder` VALUES ('JD07', '12345678904', '2022-06-02', '2022-06-03', '豪华房', 2);
-INSERT INTO `roomorder` VALUES ('JD08', '15075100853', '2022-05-31', '2022-06-01', '大床房', 1);
-INSERT INTO `roomorder` VALUES ('JD09', '15032168451', '2022-05-24', '2022-05-26', '豪华房', 0);
+INSERT INTO `roomorder` VALUES ('12345','JD01', '12345654321', '2022-05-24', '2022-05-25', '单人房', 0);
+INSERT INTO `roomorder` VALUES ('12345','JD010', '12345654321', '2022-05-31', '2022-06-02', '豪华房', 0);
+INSERT INTO `roomorder` VALUES ('12345','JD011', '15032145680', '2022-05-26', '2022-05-27', '大床房', 0);
+INSERT INTO `roomorder` VALUES ('12345','JD02', '12345678901', '2022-05-25', '2022-05-26', '单人房', 1);
+INSERT INTO `roomorder` VALUES ('12345','JD03', '12345654321', '2022-05-18', '2022-05-19', '单人房', 2);
+INSERT INTO `roomorder` VALUES ('12345','JD04', '12345678901', '2022-05-27', '2022-05-28', '单人房', 1);
+INSERT INTO `roomorder` VALUES ('12345','JD05', '12345678902', '2022-05-03', '2022-05-04', '双人房', 2);
+INSERT INTO `roomorder` VALUES ('12345','JD06', '15075100888', '2022-06-01', '2022-06-02', '双人房', 1);
+INSERT INTO `roomorder` VALUES ('12345','JD07', '12345678904', '2022-06-02', '2022-06-03', '豪华房', 2);
+INSERT INTO `roomorder` VALUES ('12345','JD08', '15075100853', '2022-05-31', '2022-06-01', '大床房', 1);
+INSERT INTO `roomorder` VALUES ('12345','JD09', '15032168451', '2022-05-24', '2022-05-26', '豪华房', 0);
 
 -- ----------------------------
 -- Table structure for 酒店房间的类型(加属性的好表)
