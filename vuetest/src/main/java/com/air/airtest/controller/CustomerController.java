@@ -6,6 +6,7 @@ import com.air.airtest.common.Result;
 import com.air.airtest.entity.Customer;
 import com.air.airtest.mapper.CustomerMapper;
 import com.air.airtest.service.CustomerService;
+import com.air.airtest.utils.CryptUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,8 @@ public class CustomerController {
                return Result.error("-1", "用户名重复");
            }
            if (customer.getCustomerpassword() == null) {
-               customer.setCustomerpassword("123456");
+               // md5加密加盐后存入密码 即数据库中的密码解密后为123456
+               customer.setCustomerpassword(CryptUtil.md5("123456"));
            }
            customerMapper.insert(customer);
            return Result.success();
@@ -53,25 +55,31 @@ public class CustomerController {
       // 酒店游客登录
       @PostMapping("/login")
       public Result<?> login(@RequestBody Customer customer) {
+        // 获取密码前要解密
           Customer res = customerMapper
                   .selectOne(Wrappers.<Customer>lambdaQuery().eq(Customer::getCustomerphone, customer.getCustomerphone())
-                          .eq(Customer::getCustomerpassword, customer.getCustomerpassword()));
+                          .eq(Customer::getCustomerpassword, CryptUtil.md5(customer.getCustomerpassword())));
+//                  .selectOne(Wrappers.<Customer>lambdaQuery().eq(Customer::getCustomerphone, customer.getCustomerphone())
+//                          .eq(Customer::getCustomerpassword, customer.getCustomerpassword()));
           if (res == null) {
               return Result.error("-1", "用户名或密码错误");
           }
           return Result.success();
       }
 
-      //更新用户信息
+      //更新用户信息(包括修改密码) 主键的联系方式不能修改
       @GetMapping("/updatecustomer")
       public Result<?> updatecustomer(@RequestParam(defaultValue = "") String customersex,@RequestParam(defaultValue = "") String customername,
-                                      @RequestParam(defaultValue = "") String customerid,@RequestParam(defaultValue = "") String customerphone)
+                                      @RequestParam(defaultValue = "") String customerid,@RequestParam(defaultValue = "") String customerage,
+                                      @RequestParam(defaultValue = "") String customerpassword)
       {
           System.out.println("&&&&"+customersex);
           System.out.println("&&&&"+customername);
           System.out.println("&&&&"+customerid);
-          System.out.println("&&&&"+customerphone);
-        int a = customerService.updateCustomerInfo(customersex, customername, customerid, customerphone);
+          System.out.println("&&&&"+customerage);
+          // 密码加密
+          System.out.println("&&&&"+CryptUtil.md5(customerpassword));
+        int a = customerService.updateCustomerInfo(customersex, customername, customerid, customerage, customerpassword);
         System.out.println(a);
         return Result.success(a);
      }

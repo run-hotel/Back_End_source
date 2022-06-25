@@ -11,5 +11,6 @@ public interface CustomerService extends BaseMapper<Customer>{
     int updateCustomerInfo(@Param("customersex")String customersex,
     @Param("customername")String customername,
     @Param("customerid")String customerid,
-    @Param("customerphone")String customerphone);
+    @Param("customerphone")String customerage,
+    @Param("customerage")String customerpassword);
 }

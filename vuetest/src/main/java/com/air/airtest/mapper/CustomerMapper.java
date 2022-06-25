@@ -11,6 +11,7 @@ public interface CustomerMapper extends BaseMapper<Customer>{
     int updateCustomerInfo(@Param("customersex")String customersex,
     @Param("customername")String customername,
     @Param("customerid")String customerid,
-    @Param("customerphone")String customerphone);
+    @Param("customerage")String customerage,
+    @Param("customerpassword")String customerpassword);
     
 }

@@ -6,9 +6,10 @@ import lombok.Data;
 @TableName("customer")
 @Data
 public class Customer {
-    private String customerphone;
-    private String customerpassword;
-    private String customername;
-    private String customerid;
-    private String customersex;
+    private String customerphone; // 联系方式
+    private String customerpassword; // 密码
+    private String customername; // 名字
+    private String customerid; // ID
+    private String customersex; // 性别
+    private String customerage; // 年龄
 }

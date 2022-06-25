@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.Guarantee_informationMapper">
+    <select id="getInfo" resultType="com.air.airtest.entity.Guarantee_information">
+        SELECT * FROM guarantee_information WHERE guarantee_type = #{guarantee_type}
+    </select>
+    <update id="updateGuarantee_informationInfo">
+        UPDATE guarantee_information
+        SET guarantee_type =  #{guarantee_type}, guarantee_information_content =  #{guarantee_information_content}, guarantee_information_costs =  #{guarantee_information_costs}
+    </update>
+</mapper>

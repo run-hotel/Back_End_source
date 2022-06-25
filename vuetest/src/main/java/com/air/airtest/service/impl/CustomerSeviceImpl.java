@@ -26,9 +26,9 @@ public class CustomerSeviceImpl implements CustomerService{
     }
 
     @Override
-    public int updateCustomerInfo(String customersex, String customername, String customerid, String customerphone) {
+    public int updateCustomerInfo(String customerphone, String customersex, String customerid, String customerage, String customerpassword) {
         // TODO Auto-generated method stub
-        return customerMapper.updateCustomerInfo(customersex, customername, customerid, customerphone);
+        return customerMapper.updateCustomerInfo(customerphone, customersex, customerid, customerage, customerpassword);
     }
 
     @Override

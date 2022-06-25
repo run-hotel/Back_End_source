@@ -8,7 +8,7 @@
     </select>
     <update id="updateCustomerInfo">
       UPDATE customer 
-      SET customersex = #{customersex}, customername =  #{customername}, customerid =  #{customerid} 
+      SET customersex = #{customersex}, customername =  #{customername}, customerid =  #{customerid}, customerage =  #{customerage}, customerpassword =  #{customerpassword}
       WHERE customerphone =  #{customerphone}
     </update>
     <!-- <update id="updateCustomerInfo">
