@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.airtest.mapper.FeedbackMapper">
+    <select id="getInfo" resultType="com.air.airtest.entity.Feedback">
+        SELECT * FROM feedback WHERE servicerid = #{servicerid}
+    </select>
+    <update id="updateFeedbackInfo">
+        UPDATE feedback
+        SET customerid =  #{customerid}, Feedback_content =  #{Feedback_content}, Feedback_date =  #{Feedback_date}
+        WHERE servicerid =  #{servicerid}
+    </update>
+</mapper>
