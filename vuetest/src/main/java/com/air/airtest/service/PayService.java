@@ -1,7 +1,7 @@
 package com.air.airtest.service;
 
 import com.alipay.api.AlipayApiException;
-import com.air.airtest.model.AlipayBean;
+import com.air.airtest.entity.AlipayBean;
 
 /**
  * 支付服务

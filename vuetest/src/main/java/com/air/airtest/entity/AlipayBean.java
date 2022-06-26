@@ -1,4 +1,4 @@
-package com.air.airtest.model;
+package com.air.airtest.entity;
 
 import lombok.Data;
 

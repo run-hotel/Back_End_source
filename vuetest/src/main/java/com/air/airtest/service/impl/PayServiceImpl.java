@@ -1,7 +1,7 @@
 package com.air.airtest.service.impl;
 
 import com.alipay.api.AlipayApiException;
-import com.air.airtest.model.AlipayBean;
+import com.air.airtest.entity.AlipayBean;
 import com.air.airtest.service.PayService;
 import com.air.airtest.utils.Alipay;
 import org.springframework.stereotype.Service;

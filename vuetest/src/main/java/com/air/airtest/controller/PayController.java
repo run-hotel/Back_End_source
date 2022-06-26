@@ -1,7 +1,7 @@
 package com.air.airtest.controller;
 
 import com.alipay.api.AlipayApiException;
-import com.air.airtest.model.AlipayBean;
+import com.air.airtest.entity.AlipayBean;
 import com.air.airtest.service.PayService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
