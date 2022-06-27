@@ -95,6 +95,7 @@ public class LoginController {
     @RequestMapping(value = "/admin", method = RequestMethod.POST)
     public AjaxResult workerLogin(String username, String password,
                                   HttpServletRequest request) {
+        System.out.println(username + " " + password);
         if (StringUtils.isEmpty(username)) {
             return ResponseTool.failed("用户名不能为空");
         } else if (StringUtils.isEmpty(password)) {
