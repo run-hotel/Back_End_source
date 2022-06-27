@@ -47,6 +47,8 @@ public class CustomerController {
     if (customer.getCustomerpassword() == null) {
       // md5加密加盐后存入密码 即数据库中的密码解密后为123456
       customer.setCustomerpassword(CryptUtil.md5("123456"));
+    } else {
+      customer.setCustomerpassword(CryptUtil.md5(customer.getCustomerpassword()));
     }
     customerMapper.insert(customer);
     return Result.success();
