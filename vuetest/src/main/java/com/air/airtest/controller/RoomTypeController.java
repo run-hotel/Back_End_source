@@ -1,16 +1,15 @@
 package com.air.airtest.controller;
 
-import java.util.List;
-
-import com.air.airtest.common.Result;
+import com.air.airtest.config.Result;
 import com.air.airtest.entity.RoomType;
 import com.air.airtest.service.RoomTypeService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/roomtype")

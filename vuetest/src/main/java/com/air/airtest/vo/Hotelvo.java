@@ -1,8 +1,8 @@
 package com.air.airtest.vo;
 
-import java.sql.Date;
-
 import lombok.Data;
+
+import java.sql.Date;
 @Data
 public class Hotelvo {
     private String hotelstaffno;

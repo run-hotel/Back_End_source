@@ -15,13 +15,22 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="mapper/UserMapper.xml"/>
+    <mapper resource="mapper/CheckInMapper.xml"/>
+    <mapper resource="mapper/CommentMapper.xml"/>
+    <mapper resource="mapper/CustomerMapper.xml"/>
+    <mapper resource="mapper/DepartmentInfoMapper.xml"/>
+    <mapper resource="mapper/FeedbackMapper.xml"/>
+    <mapper resource="mapper/Guarantee_informationMapper.xml"/>
+    <mapper resource="mapper/HandelOrderMapper.xml"/>
+    <mapper resource="mapper/HotelMapper.xml"/>
+    <mapper resource="mapper/HotelStaffMapper.xml"/>
+    <mapper resource="mapper/OrderMapper.xml"/>
+    <mapper resource="mapper/OrderTypeMapper.xml"/>
     <mapper resource="mapper/RoomMapper.xml"/>
     <mapper resource="mapper/RoomOrderMapper.xml"/>
-    <mapper resource="mapper/HandelOrderMapper.xml"/>
-    <mapper resource="mapper/HotelStaffMapper.xml"/>
     <mapper resource="mapper/RoomTypeMapper.xml"/>
-    <mapper resource="mapper/CustomerMapper.xml"/>
+    <mapper resource="mapper/UserMapper.xml"/>
+    <mapper resource="mapper/WorkerMapper.xml"/>
     <!-- <mapper class="com.air.airtest.mapper.UserMapper"/> -->
   </mappers>
 </configuration>

@@ -1,31 +1,14 @@
 package com.air.airtest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import java.util.List;
-
-import com.air.airtest.entity.Customer;
-import com.air.airtest.entity.Handel;
-import com.air.airtest.entity.HotelStaff;
-import com.air.airtest.entity.RoomInfo;
-import com.air.airtest.entity.RoomOrderInfo;
-import com.air.airtest.entity.RoomType;
-import com.air.airtest.mapper.CustomerMapper;
-import com.air.airtest.mapper.HandelOrderMapper;
-import com.air.airtest.mapper.HotelStaffMapper;
 import com.air.airtest.mapper.RoomMapper;
-import com.air.airtest.mapper.RoomOrderMapper;
-import com.air.airtest.mapper.RoomTypeMapper;
-import com.air.airtest.vo.Hotelvo;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 
 public class Test {
     public static void main(String[] args) throws ParseException {

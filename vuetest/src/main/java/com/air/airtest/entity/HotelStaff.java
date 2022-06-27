@@ -1,7 +1,6 @@
 package com.air.airtest.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import lombok.Data;
 @TableName("hotelstaff")
 @Data

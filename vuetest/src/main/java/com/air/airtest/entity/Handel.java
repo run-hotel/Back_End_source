@@ -1,10 +1,9 @@
 package com.air.airtest.entity;
 
-import java.sql.Date;
-
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import lombok.Data;
+
+import java.sql.Date;
 @TableName("handel")
 @Data
 public class Handel {

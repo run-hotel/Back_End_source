@@ -1,6 +1,6 @@
 package com.air.airtest.controller;
 
-import com.air.airtest.common.Result;
+import com.air.airtest.config.Result;
 import com.air.airtest.entity.Feedback;
 import com.air.airtest.mapper.FeedbackMapper;
 import com.air.airtest.service.FeedbackService;

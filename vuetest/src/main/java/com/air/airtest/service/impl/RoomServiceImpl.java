@@ -1,21 +1,21 @@
 package com.air.airtest.service.impl;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-
+import com.air.airtest.entity.Room;
 import com.air.airtest.entity.RoomInfo;
+import com.air.airtest.enums.RoomStatus;
 import com.air.airtest.mapper.RoomMapper;
 import com.air.airtest.service.RoomService;
 import com.air.airtest.vo.Hotelvo;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-
-import com.baomidou.mybatisplus.core.metadata.IPage;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class RoomServiceImpl implements RoomService{
@@ -55,110 +55,131 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public int insert(RoomInfo entity) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int deleteById(Serializable id) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int deleteById(RoomInfo entity) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int deleteByMap(Map<String, Object> columnMap) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int delete(Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int deleteBatchIds(Collection<?> idList) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int updateById(RoomInfo entity) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int update(RoomInfo entity, Wrapper<RoomInfo> updateWrapper) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public RoomInfo selectById(Serializable id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<RoomInfo> selectBatchIds(Collection<? extends Serializable> idList) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<RoomInfo> selectByMap(Map<String, Object> columnMap) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Long selectCount(Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<RoomInfo> selectList(Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Map<String, Object>> selectMaps(Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Object> selectObjs(Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public <P extends IPage<RoomInfo>> P selectPage(P page, Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return roomMapper.selectPage(page, queryWrapper);
-    }
-
-    @Override
-    public <P extends IPage<Map<String, Object>>> P selectMapsPage(P page, Wrapper<RoomInfo> queryWrapper) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public List<Hotelvo> selectRemainingRooms(String roomtypename) {
-        // TODO Auto-generated method stub
-        return roomMapper.selectRemainingRooms(roomtypename);
+        return null;
+    }
+
+    @Override
+    public int insert(Room room) {
+        return roomMapper.insertSelective(room);
+    }
+
+    @Override
+    public int delete(int roomId) {
+        return roomMapper.deleteByPrimaryKey(roomId);
+    }
+
+    @Override
+    public int update(Room room) {
+        return roomMapper.updateByPrimaryKeySelective(room);
+    }
+
+    @Override
+    public Room selectById(int roomId) {
+        return roomMapper.selectByPrimaryKey(roomId);
+    }
+
+    @Override
+    public Room selectByNumber(String roomNumber) {
+        return roomMapper.selectByNumber(roomNumber);
+    }
+
+    @Override
+    public List<Room> selectByStatus(int roomStatus) {
+        return roomMapper.selectByStatus(roomStatus);
+    }
+
+    @Override
+    public List<Room> selectByType(int typeId) {
+        return roomMapper.selectByType(typeId);
+    }
+
+    @Override
+    public List<Room> selectAll() {
+        return roomMapper.selectAll(null);
+    }
+
+    @Override
+    @Transactional
+    public int orderRoom(int typeId) {
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId, RoomStatus.AVAILABLE.getCode());
+        if (room == null) return -1;
+        room.setRoomStatus(RoomStatus.ORDERED.getCode());
+        return roomMapper.updateByPrimaryKeySelective(room);
+    }
+
+    /**
+     * 入住
+     *
+     * @param typeId
+     * @return
+     */
+    @Override
+    public int inRoom(int typeId) {
+
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId, RoomStatus.ORDERED.getCode());
+        System.out.println(room);
+        if(room==null)
+            return -1;
+        room.setRoomStatus(RoomStatus.IN_USE.getCode());
+        if (roomMapper.updateByPrimaryKeySelective(room) <= 0)
+            return -1;
+        else return room.getRoomId();
+    }
+
+
+    /**
+     * 预定
+     *
+     * @param typeId
+     * @return
+     */
+
+    @Override
+    public int booKingRoom(int typeId) {
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId, RoomStatus.AVAILABLE.getCode());
+        System.out.println(room);
+        room.setRoomStatus(RoomStatus.ORDERED.getCode());
+        if (roomMapper.updateByPrimaryKeySelective(room) <= 0)
+            return -1;
+        else return room.getRoomId();
+    }
+
+    /**
+     * 退房
+     *
+     * @param typeId
+     * @return
+     */
+    @Override
+    public int outRoom(int typeId) {
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId, RoomStatus.IN_USE.getCode());
+        if (room == null) return -1;
+        room.setRoomStatus(RoomStatus.AVAILABLE.getCode());
+        return roomMapper.updateByPrimaryKeySelective(room);
+    }
+
+    @Override
+    public PageInfo<Room> selectAllByPage(Integer pageNum, Integer pageSize, String search) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Room> rooms = roomMapper.selectAll(search);
+        PageInfo<Room> roomPageInfo = new PageInfo<>(rooms);
+        return roomPageInfo;
+    }
+
+    @Override
+    public int deleteBatchIds(List<Integer> ids) {
+        return roomMapper.deleteBatch(ids);
+    }
+
+    @Override
+    public List<Map<String, Integer>> selectGroupByType() {
+
+        return roomMapper.selectGroupByType();
+    }
+
+    @Override
+    public Page<RoomInfo> selectPage(Page<Object> objectPage, LambdaQueryWrapper<RoomInfo> wrapper) {
+        return null;
     }
 }

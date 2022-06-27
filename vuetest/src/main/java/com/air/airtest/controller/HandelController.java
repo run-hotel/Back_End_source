@@ -1,23 +1,16 @@
 package com.air.airtest.controller;
 
-import java.util.List;
-
-import com.air.airtest.common.Result;
+import com.air.airtest.config.Result;
 import com.air.airtest.entity.Handel;
-
 import com.air.airtest.service.HandelService;
 import com.air.airtest.service.OrderService;
 import com.air.airtest.service.RoomService;
 import com.air.airtest.service.RoomTypeService;
 import com.air.airtest.vo.Hotelvo;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/handel")

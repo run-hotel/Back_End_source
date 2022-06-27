@@ -1,7 +1,7 @@
 server:
   port: 8090
   servlet:
-    context-path: /Back_End_source
+    context-path: /
 spring:
   #数据库连接配置
   datasource:
@@ -18,3 +18,5 @@ mybatis:
   #开启驼峰命名
   configuration:
     map-underscore-to-camel-case: true
+file:
+  ip: 8090

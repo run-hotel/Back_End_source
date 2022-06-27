@@ -1,6 +1,6 @@
 package com.air.airtest.controller;
 
-import com.air.airtest.common.Result;
+import com.air.airtest.config.Result;
 import com.air.airtest.entity.Guarantee_information;
 import com.air.airtest.mapper.Guarantee_informationMapper;
 import com.air.airtest.service.Guarantee_informationService;

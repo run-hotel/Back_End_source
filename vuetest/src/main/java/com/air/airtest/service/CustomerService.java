@@ -2,7 +2,6 @@ package com.air.airtest.service;
 
 import com.air.airtest.entity.Customer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface CustomerService extends BaseMapper<Customer>{

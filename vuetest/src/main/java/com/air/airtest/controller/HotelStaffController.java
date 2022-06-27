@@ -1,8 +1,6 @@
 package com.air.airtest.controller;
 
-import javax.annotation.Resource;
-
-import com.air.airtest.common.Result;
+import com.air.airtest.config.Result;
 import com.air.airtest.entity.HotelStaff;
 import com.air.airtest.mapper.HotelStaffMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/hotelstaff")
