@@ -4,7 +4,7 @@ import com.air.airtest.entity.Worker;
 import com.air.airtest.mapper.DepartmentInfoMapper;
 import com.air.airtest.mapper.WorkerMapper;
 import com.air.airtest.service.WorkerService;
-import com.air.airtest.utils.CryptUtil;
+import com.air.airtest.utils.MD5Utils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public int insert(Worker worker) {
-        worker.setPassword(CryptUtil.md5(worker.getPassword()));
+        worker.setPassword(MD5Utils.MD5Encode(worker.getPassword()));
         return workerMapper.insert(worker);
     }
 
@@ -64,16 +64,13 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker login(String username, String password, String role) {
-        String pass = CryptUtil.md5(password);
+        String pass = MD5Utils.MD5Encode(password);
         return workerMapper.selectByUsernameAndPassword(username, pass, role);
     }
 
     @Override
     public Worker login(String username, String password) {
-//        String pass = CryptUtil.md5(password);
-        System.out.println(username + " 123   " + password);
-        String pass = password;
-
+        String pass = MD5Utils.MD5Encode(password);
         return workerMapper.selectByUsernamePassword(username, pass);
     }
 

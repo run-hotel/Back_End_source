@@ -5,7 +5,7 @@ import com.air.airtest.response.AjaxResult;
 import com.air.airtest.response.MsgType;
 import com.air.airtest.response.ResponseTool;
 import com.air.airtest.service.UserService;
-import com.air.airtest.utils.CryptUtil;
+import com.air.airtest.utils.MD5Utils;
 import com.air.airtest.utils.SendmailUtil;
 import com.air.airtest.utils.VerifyCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,7 +151,7 @@ public class UserController {
         if (user == null)
             return ResponseTool.failed("用户名不存在");
         //密码
-        user.setPassword(CryptUtil.md5(password));
+        user.setPassword(MD5Utils.MD5Encode(password));
         userService.updateUser(user);
 
         session.removeAttribute("code");
