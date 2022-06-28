@@ -2,6 +2,7 @@ package com.air.airtest.controller.user;
 
 import com.air.airtest.controller.user.dto.AliPay;
 import com.air.airtest.entity.Order;
+import com.air.airtest.entity.RoomOrderInfo;
 import com.air.airtest.service.OrderService;
 import com.air.airtest.service.RoomService;
 import com.air.airtest.service.RoomTypeService;
@@ -9,10 +10,7 @@ import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.payment.page.models.AlipayTradePagePayResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +32,14 @@ public class AliPayController {
     private RoomTypeService roomTypeService;
 
     @GetMapping("/pay")
-    public String pay(AliPay aliPay) {
+    public String pay() {
         AlipayTradePagePayResponse response;
+        RoomOrderInfo roomOrderInfo = new RoomOrderInfo();
+        roomOrderInfo.setOrderno(String.valueOf(Math.random()));
         try {
             //  发起API调用（以创建当面付收款二维码为例）
             response = Factory.Payment.Page()
-                    .pay(aliPay.getSubject(), aliPay.getTraceNo(), aliPay.getTotalAmount(), "");
+                    .pay("开房", roomOrderInfo.getOrderno(), "200", "http://localhost:8080/hotel");
         } catch (Exception e) {
             System.err.println("调用遭遇异常，原因：" + e.getMessage());
             throw new RuntimeException(e.getMessage(), e);
@@ -74,20 +74,15 @@ public class AliPayController {
                 System.out.println("买家在支付宝唯一id: " + params.get("buyer_id"));
                 System.out.println("买家付款时间: " + params.get("gmt_payment"));
                 System.out.println("买家付款金额: " + params.get("buyer_pay_amount"));
-
                 // 更新订单为已支付
-
                 Order order = orderService.selectByTradeno(tradeNo);
                 if (order != null) {
                     log.info("orderId{}", order.getOrderId());
                     order.setOrderStatus(1);
                     orderService.update(order);
                 }
-
                 roomTypeService.updateRest(order.getRoomTypeId(), -1);//房间类型数量-1
                 roomService.booKingRoom((order.getRoomTypeId()));
-
-
             }
         }
         return "success";
