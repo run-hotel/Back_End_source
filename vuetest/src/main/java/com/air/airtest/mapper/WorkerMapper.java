@@ -24,7 +24,7 @@ public interface WorkerMapper {
 
     Worker selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password, @Param("role") String role);
 
-    Worker selectByUsernamePassword(@Param("username") String username, @Param("password") String password);
+    Worker  selectByUsernamePassword(@Param("username") String username, @Param("password") String password);
 
     List<Worker> selectByRole(String role);
 
