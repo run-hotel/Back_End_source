@@ -179,6 +179,7 @@ public class OpRoomTypeController {
     public AjaxResult deleteBatch(@PathVariable("ids") List<Integer> ids) {
         System.out.println(Arrays.toString(ids.toArray()));
         int res = roomTypeService.deleteBatchIds(ids);
+        System.out.println(ids);
         if (res > 0)
             return ResponseTool.success();
         return ResponseTool.failed("删除失败!");

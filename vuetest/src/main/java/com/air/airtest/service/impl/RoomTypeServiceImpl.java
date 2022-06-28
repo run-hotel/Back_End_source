@@ -124,7 +124,6 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 
     @Override
     public int deleteBatchIds(List<Integer> ids) {
-
         return roomTypeMapper.deleteBatch(ids);
     }
     @Override
