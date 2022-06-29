@@ -6,9 +6,9 @@ spring:
   #数据库连接配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&&useSSL=true
+    url: jdbc:mysql://150.158.145.94:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&&useSSL=true
     username: root
-    password: 123456
+    password: root
 #mybatis的相关配置
 mybatis:
   #mapper配置文件
