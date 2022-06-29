@@ -70,7 +70,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker login(String username, String password) {
-        String pass = MD5Utils.MD5Encode(password);
+        String pass = password;
         return workerMapper.selectByUsernamePassword(username, pass);
     }
 
