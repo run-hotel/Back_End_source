@@ -42,10 +42,9 @@ public class Comment implements Serializable {
     private RoomType room;
 
     public Comment(Integer typeId, String content) {
-        this.typeId=typeId;
-        this.content=content;
+        this.typeId = typeId;
+        this.content = content;
     }
-
 
     public RoomType getRoom() {
         return room;

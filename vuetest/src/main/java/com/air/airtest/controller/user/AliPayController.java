@@ -32,14 +32,14 @@ public class AliPayController {
     private RoomTypeService roomTypeService;
 
     @GetMapping("/pay")
-    public String pay() {
+    public String pay(@RequestParam(defaultValue = "123") String num, @RequestParam(defaultValue = "123") String name) {
         AlipayTradePagePayResponse response;
         RoomOrderInfo roomOrderInfo = new RoomOrderInfo();
         roomOrderInfo.setOrderno(String.valueOf(Math.random()));
         try {
             //  发起API调用（以创建当面付收款二维码为例）
             response = Factory.Payment.Page()
-                    .pay("开房", roomOrderInfo.getOrderno(), "200", "http://localhost:8080/hotel");
+                    .pay(name, roomOrderInfo.getOrderno(), num, "http://localhost:8080/hotel");
         } catch (Exception e) {
             System.err.println("调用遭遇异常，原因：" + e.getMessage());
             throw new RuntimeException(e.getMessage(), e);

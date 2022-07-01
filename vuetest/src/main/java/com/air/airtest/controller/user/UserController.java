@@ -53,7 +53,6 @@ public class UserController {
             return ResponseTool.success("修改成功");
         return ResponseTool.success("修改失败，请检查或稍后再试");
     }
-
     /**
      * 更改密码
      *
@@ -95,11 +94,9 @@ public class UserController {
 
     @RequestMapping("/checkUserOremail")
     public AjaxResult checkUsernameAndEmail(HttpSession session, String username, String email) {
-
         User user = userService.selectByUsername(username);
         if (user == null)
             return ResponseTool.failed("用户不存在");
-
         if (user.getEmail().equals(email)) {
             try {
                 String verifyCode = null;
@@ -111,11 +108,9 @@ public class UserController {
                 session.setMaxInactiveInterval(60);
                 System.out.println(session.getId());
                 session.setAttribute("code", verifyCode);
-
                 return ResponseTool.success("请到邮箱获取验证码");
                 // 如果不等于空的话就直接进行验证
             } catch (Exception e) {
-
                /* model.addAttribute("info", errorInfo);
                 return "findPass";*/
             }
@@ -123,20 +118,15 @@ public class UserController {
         //返回邮箱或者用户名不存在
         return ResponseTool.failed("邮箱输入错误");
     }
-
-
     @RequestMapping("/checkCode")
     public AjaxResult checkCode(HttpSession session, String code, String username) {
-
         if (userService.selectByUsername(username) == null)
             return ResponseTool.failed("用户未登录");
-
         String vertifyCode = (String) session.getAttribute("code");
         if (code.equals(vertifyCode))
             return ResponseTool.success();
         return ResponseTool.failed("验证码错误");
     }
-
     /**
      * x修改密码
      *
@@ -153,11 +143,9 @@ public class UserController {
         //密码
         user.setPassword(MD5Utils.MD5Encode(password));
         userService.updateUser(user);
-
         session.removeAttribute("code");
         return ResponseTool.success();
     }
-
     /**
      * 注销
      *
@@ -168,10 +156,8 @@ public class UserController {
     public AjaxResult logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session != null) {
-
             session.removeAttribute("userId");
             session.removeAttribute("username");
-
             return ResponseTool.success("注销成功");
         }
         return ResponseTool.failed("未登录");
