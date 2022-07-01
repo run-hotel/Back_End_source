@@ -7,6 +7,7 @@ import java.sql.Date;
 @TableName("roomorder")
 @Data
 public class RoomOrderInfo {
+    private String hotelstaffno;
     private String orderno;
     private String customerphone;
     private Date inttime;

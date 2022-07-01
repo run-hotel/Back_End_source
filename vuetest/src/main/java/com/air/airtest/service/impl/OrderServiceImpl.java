@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("OrderService")
 public class OrderServiceImpl implements OrderService{
 
     @Autowired
@@ -169,6 +169,7 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public int addOrder(RoomOrderInfo roomOrderInfo) {
         // TODO Auto-generated method stub
+        roomOrderInfo.setHotelstaffno("12345");
         return roomOrderMapper.addOrder(roomOrderInfo);
     }
     @Override

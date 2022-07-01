@@ -26,7 +26,7 @@
     </select>
     <insert id="addOrder" parameterType="com.air.airtest.entity.RoomOrderInfo">
       INSERT INTO roomorder
-      VALUES(#{orderno},#{customerphone},#{inttime},#{outtime},#{roomtypename},#{orderstatus});
+      VALUES(#{hotelstaffno}, #{orderno},#{customerphone},#{inttime},#{outtime},#{roomtypename},#{orderstatus});
     </insert>
     <select id="selectOrder" resultType="com.air.airtest.entity.RoomOrderInfo">
       select * from roomorder where customerphone = #{customerphone}

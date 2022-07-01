@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("CheckInService")
 public class CheckInServiceImpl implements CheckInService {
     @Autowired
     private CheckInMapper checkInMapper;
