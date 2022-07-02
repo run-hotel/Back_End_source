@@ -2,6 +2,7 @@ package com.air.airtest.service.impl;
 
 import com.air.airtest.entity.Comment;
 import com.air.airtest.service.CommentService;
+import com.air.airtest.utils.SensitiveFilter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,8 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public Comment insert(Comment comment) {
+        SensitiveFilter sensitiveFilter = new SensitiveFilter();
+        comment.setContent(sensitiveFilter.filter(comment.getContent()));
         this.CommentMapper.insert(comment);
         return comment;
     }

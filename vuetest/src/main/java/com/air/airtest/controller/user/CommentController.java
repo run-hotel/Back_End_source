@@ -4,6 +4,7 @@ import com.air.airtest.entity.Comment;
 import com.air.airtest.response.AjaxResult;
 import com.air.airtest.response.ResponseTool;
 import com.air.airtest.service.CommentService;
+import com.air.airtest.utils.SensitiveFilter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
+
     /**
      * 服务对象
      */
@@ -65,9 +67,9 @@ public class CommentController {
 
     @GetMapping("/insert")
     public AjaxResult add(@RequestParam(defaultValue = "1") Integer typeId, @RequestParam(defaultValue = "1") String content , HttpSession session) {
-        Comment comment = new Comment(typeId, content);
+        SensitiveFilter sensitiveFilter = new SensitiveFilter();
+        Comment comment = new Comment(typeId, sensitiveFilter.filter(content));
         Integer userId = (Integer) session.getAttribute("userId");
-        comment.setUserId(userId);
         return ResponseTool.success(this.commentService.insert(comment));
     }
 
