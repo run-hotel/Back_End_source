@@ -4,6 +4,7 @@ package com.air.airtest.controller;
 import javax.annotation.Resource;
 
 import com.air.airtest.config.Result;
+import com.air.airtest.controller.common.RegisterController;
 import com.air.airtest.entity.Customer;
 import com.air.airtest.mapper.CustomerMapper;
 import com.air.airtest.service.CustomerService;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Random;
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -28,6 +31,9 @@ public class CustomerController {
   @Resource
   CustomerMapper customerMapper;
 
+  @Autowired
+  RegisterController tmp;
+
   @GetMapping("/selectcustomer")
   public Result<?> selectcustomer(@RequestParam(defaultValue = "") String customerphone){
     //System.out.println("____>"+customerphone);
@@ -36,6 +42,27 @@ public class CustomerController {
     return Result.success(as);
   }
   // 注册
+  public static String GetRandomCharAndNumber(int len) {
+    StringBuffer sb = new StringBuffer();
+    for (int i = 0; i <len; i++) {
+      int intRand = (int) (Math.random() * 10);
+      char base = '0';
+      char c = (char) (base + intRand % 10);
+      sb.append(c);
+    }
+    return sb.toString();
+  }
+  //length用户要求产生字符串的长度
+  public static String getRandomString(int length){
+    String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    Random random = new Random();
+    StringBuffer sb = new StringBuffer();
+    for(int i = 0; i < length; i++){
+      int number = random.nextInt(str.length());
+      sb.append(str.charAt(number));
+    }
+    return sb.toString();
+  }
   @PostMapping("/register")
   public Result<?> register(@RequestBody Customer customer) // throws IOException{
   {
@@ -50,7 +77,16 @@ public class CustomerController {
     } else {
       customer.setCustomerpassword(CryptUtil.md5(customer.getCustomerpassword()));
     }
+    String str1 = GetRandomCharAndNumber(8 );
+    String str2 = getRandomString(8 );
+    customer.setCustomerid(str2);
+    String name = getRandomString(7);
+    tmp.userRegister(str2, customer.getCustomerpassword(),
+            name, "男",
+            customer.getCustomerphone(),"",
+            "南昌市", str1);
     customerMapper.insert(customer);
+
     return Result.success();
   }
 

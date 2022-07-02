@@ -20,7 +20,7 @@ public interface CommentMapper {
      * @return 实例对象
      */
     Comment queryById(Integer id);
-
+    Comment queryById1(Integer id);
     /**
      * 查询指定行数据
      *

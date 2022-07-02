@@ -47,6 +47,10 @@ public class CommentController {
         return ResponseTool.success(this.commentService.queryById(id));
     }
 
+    @GetMapping("/get/{id}")
+    public AjaxResult queryById1(@PathVariable("id") Integer id) {
+        return ResponseTool.success(this.commentService.queryById1(id));
+    }
     /**
      * 新增数据
      * <p>
@@ -58,9 +62,10 @@ public class CommentController {
      *
      * @return 新增结果
      */
-    @PostMapping
-    public AjaxResult add(Integer typeId,String content , HttpSession session) {
-        Comment comment = new Comment(typeId,content);
+
+    @GetMapping("/insert")
+    public AjaxResult add(@RequestParam(defaultValue = "1") Integer typeId, @RequestParam(defaultValue = "1") String content , HttpSession session) {
+        Comment comment = new Comment(typeId, content);
         Integer userId = (Integer) session.getAttribute("userId");
         comment.setUserId(userId);
         return ResponseTool.success(this.commentService.insert(comment));

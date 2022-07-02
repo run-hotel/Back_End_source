@@ -7,6 +7,7 @@ import com.air.airtest.response.AjaxResult;
 import com.air.airtest.response.ResponseTool;
 import com.air.airtest.service.UserService;
 import com.air.airtest.service.WorkerService;
+import com.air.airtest.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
 
     @Autowired
-    UserService userService;
+    public UserService userService;
     @Autowired
     WorkerService workerService;
 
@@ -28,8 +29,13 @@ public class RegisterController {
             String phone,String email,
             String address,String idcard){
         User user = new User(username,password,name,gender,phone,email,address,idcard);
+        user.setUserId(Integer.valueOf(idcard));
+        System.out.println(user);
+        if(workerService == null) {
+            System.out.println("1234123123");
+        }
         int result = userService.insertUser(user);
-        if(result==1){
+        if(result == 1){
             return ResponseTool.success(result);
         }
         else return ResponseTool.failed("注册失败,请稍后再试");

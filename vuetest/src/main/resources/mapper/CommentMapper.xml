@@ -39,6 +39,12 @@
         where id = #{id}
     </select>
 
+    <select id="queryById1" resultMap="CommentMap">
+        select
+            id, user_id, content, type_id, approve, create_time
+        from comment
+        where user_id = #{id}
+    </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CommentMap">
         select

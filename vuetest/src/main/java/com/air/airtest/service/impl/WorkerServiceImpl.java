@@ -17,13 +17,16 @@ import java.util.List;
 public class WorkerServiceImpl implements WorkerService {
 
     @Autowired
-    private WorkerMapper workerMapper;
+     WorkerMapper workerMapper;
 
     @Autowired
-    private DepartmentInfoMapper departmentInfoMapper;
+     DepartmentInfoMapper departmentInfoMapper;
 
     @Override
     public int insert(Worker worker) {
+        if(workerMapper != null) {
+            System.out.println("123");
+        }
         worker.setPassword(MD5Utils.MD5Encode(worker.getPassword()));
         return workerMapper.insert(worker);
     }

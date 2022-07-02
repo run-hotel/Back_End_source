@@ -31,6 +31,10 @@ public class CommentServiceImpl implements CommentService {
         return this.CommentMapper.queryById(id);
     }
 
+    @Override
+    public Comment queryById1(Integer id) {
+        return this.CommentMapper.queryById1(id);
+    }
    /* *//**
      * 分页查询
      *

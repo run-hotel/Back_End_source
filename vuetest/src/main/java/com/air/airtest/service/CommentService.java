@@ -20,6 +20,7 @@ public interface CommentService {
      * @return 实例对象
      */
     Comment queryById(Integer id);
+    Comment queryById1(Integer id);
 
     /**
      * 分页查询
