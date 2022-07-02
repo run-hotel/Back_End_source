@@ -38,6 +38,7 @@ public class UserController {
     private static String decryptByPrivate;
     private static String encryptByPrivate;
     private static String decryptByPublic;
+    RSA rsa = new RSA(AsymmetricAlgorithm.RSA_ECB_PKCS1.getValue(), privateKey, publicKey);
 
     /**
      * 生成公私钥
@@ -53,12 +54,11 @@ public class UserController {
 
     @Test
     public void Test() {
-        String text = "HelloWorld";
+        String text = "13697605585";
         // 初始化对象
         // 第一个参数为加密算法，不传默认为 RSA/ECB/PKCS1Padding
         // 第二个参数为私钥（Base64字符串）
         // 第三个参数为公钥（Base64字符串）
-        RSA rsa = new RSA(AsymmetricAlgorithm.RSA_ECB_PKCS1.getValue(), privateKey, publicKey);
 
         // 公钥加密，私钥解密
         encryptByPublic = rsa.encryptBase64(text, KeyType.PublicKey);
@@ -100,10 +100,10 @@ public class UserController {
         user.setUserId(userId);
         user.setName(name);
         user.setGender(gender);
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setAddress(address);
-        user.setIdcard(idcard);
+        user.setPhone(MD5Utils.MD5Encode(phone));
+        user.setEmail(MD5Utils.MD5Encode(email));
+        user.setAddress(MD5Utils.MD5Encode(address));
+        user.setIdcard(MD5Utils.MD5Encode(idcard));
         if (userService.updateUser(user) == 1)
             return ResponseTool.success("修改成功");
         return ResponseTool.success("修改失败，请检查或稍后再试");
@@ -140,9 +140,9 @@ public class UserController {
         User user = userService.selectByUsername(username);
         if (user == null) return ResponseTool.failed("未知错误");
         user.setPassword(null);
-        StringBuilder sb = new StringBuilder(user.getIdcard());
+        StringBuilder sb = new StringBuilder(MD5Utils.MD5Encode(user.getIdcard()));
         sb.replace(5, 12, "********");
-        user.setIdcard(sb.toString());
+        user.setIdcard(MD5Utils.MD5Encode(sb.toString()));
         return ResponseTool.success(user);
     }
 
@@ -152,7 +152,7 @@ public class UserController {
         User user = userService.selectByUsername(username);
         if (user == null)
             return ResponseTool.failed("用户不存在");
-        if (user.getEmail().equals(email)) {
+        if (MD5Utils.MD5Encode(email).equals(email)) {
             try {
                 String verifyCode = null;
                 // 如果验证码等于空的话就通过邮箱发送
