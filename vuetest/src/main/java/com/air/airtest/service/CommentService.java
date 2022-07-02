@@ -61,4 +61,5 @@ public interface CommentService {
     PageInfo<Comment> queryAllComment(Integer pageNum, Integer pageSize, String roomNumber);
 
     List<Comment> queryAllComment(String roomNumber);
+    List<Comment> queryAllComment1();
 }

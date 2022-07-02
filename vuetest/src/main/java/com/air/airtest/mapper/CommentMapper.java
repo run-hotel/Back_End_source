@@ -79,5 +79,6 @@ public interface CommentMapper {
     int deleteById(Integer id);
 
     List<Comment> queryAll(String roomType);
+    List<Comment> queryAll1();
 }
 

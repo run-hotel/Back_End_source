@@ -38,6 +38,11 @@ public class CommentController {
         return ResponseTool.success(this.commentService.queryAllComment(pageNum, pageSize, roomType));
     }
 
+    @GetMapping("/getAlll")
+    public AjaxResult queryAlll() {
+        System.out.println("123123");
+        return ResponseTool.success(this.commentService.queryAllComment1());
+    }
     /**
      * 通过主键查询单条数据
      *
@@ -66,7 +71,7 @@ public class CommentController {
      */
 
     @GetMapping("/insert")
-    public AjaxResult add(@RequestParam(defaultValue = "1") Integer id, @RequestParam(defaultValue = "1") Integer typeId, @RequestParam(defaultValue = "1") String content , HttpSession session) {
+    public AjaxResult add(@RequestParam(defaultValue = "1") Integer id, @RequestParam(defaultValue = "1") Integer typeId, @RequestParam(defaultValue = "") String content , HttpSession session) {
         SensitiveFilter sensitiveFilter = new SensitiveFilter();
         sensitiveFilter.init();
         Comment comment = new Comment(typeId, sensitiveFilter.filter(content));

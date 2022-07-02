@@ -45,6 +45,11 @@
         from comment
         where user_id = #{id}
     </select>
+    <select id="queryAll1" resultMap="CommentMap" resultType="com.air.airtest.entity.Comment">
+        select
+            id, user_id, content, type_id, approve, create_time
+        from comment
+    </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CommentMap">
         select

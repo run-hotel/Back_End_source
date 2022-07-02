@@ -100,4 +100,8 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> queryAllComment(String roomNumber) {
         return  CommentMapper.queryAll(roomNumber);
     }
+    @Override
+    public List<Comment> queryAllComment1() {
+        return CommentMapper.queryAll1();
+    }
 }

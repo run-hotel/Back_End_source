@@ -35,7 +35,7 @@ public class CustomerController {
   RegisterController tmp;
 
   @GetMapping("/selectcustomer")
-  public Result<?> selectcustomer(@RequestParam(defaultValue = "") String customerphone){
+  public Result<?> selectcustomer(@RequestParam(defaultValue = "") String customerphone) {
     //System.out.println("____>"+customerphone);
     Customer as = customerService.getInfo(customerphone);
     //System.out.println("____>"+as);
