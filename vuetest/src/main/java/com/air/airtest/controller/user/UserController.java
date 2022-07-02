@@ -1,5 +1,10 @@
 package com.air.airtest.controller.user;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.AsymmetricAlgorithm;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
 import com.air.airtest.entity.User;
 import com.air.airtest.response.AjaxResult;
 import com.air.airtest.response.MsgType;
@@ -8,6 +13,8 @@ import com.air.airtest.service.UserService;
 import com.air.airtest.utils.MD5Utils;
 import com.air.airtest.utils.SendmailUtil;
 import com.air.airtest.utils.VerifyCodeUtil;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,10 +22,58 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.KeyPair;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+
+    /**
+     * 私钥和公钥
+     */
+    private static String privateKey;
+    private static String publicKey;
+
+    private static String encryptByPublic;
+    private static String decryptByPrivate;
+    private static String encryptByPrivate;
+    private static String decryptByPublic;
+
+    /**
+     * 生成公私钥
+     */
+    @BeforeAll
+    public static void genKey() {
+        KeyPair pair = SecureUtil.generateKeyPair("RSA");
+        privateKey = Base64.encode(pair.getPrivate().getEncoded());
+        System.out.println("私钥\t" + privateKey);
+        publicKey = Base64.encode(pair.getPublic().getEncoded());
+        System.out.println("公钥\t" + publicKey);
+    }
+
+    @Test
+    public void Test() {
+        String text = "HelloWorld";
+        // 初始化对象
+        // 第一个参数为加密算法，不传默认为 RSA/ECB/PKCS1Padding
+        // 第二个参数为私钥（Base64字符串）
+        // 第三个参数为公钥（Base64字符串）
+        RSA rsa = new RSA(AsymmetricAlgorithm.RSA_ECB_PKCS1.getValue(), privateKey, publicKey);
+
+        // 公钥加密，私钥解密
+        encryptByPublic = rsa.encryptBase64(text, KeyType.PublicKey);
+        System.out.println("公钥加密：" + encryptByPublic);
+        decryptByPrivate = rsa.decryptStr(encryptByPublic, KeyType.PrivateKey);
+        System.out.println("私钥解密：" + decryptByPrivate);
+
+        // 私钥加密，公钥解密
+        encryptByPrivate = rsa.encryptBase64(text, KeyType.PrivateKey);
+        System.out.println("私钥加密：" + encryptByPrivate);
+        decryptByPublic = rsa.decryptStr(encryptByPrivate, KeyType.PublicKey);
+        System.out.println("公钥解密：" + decryptByPublic);
+
+    }
+
     @Autowired
     private UserService userService;
 
