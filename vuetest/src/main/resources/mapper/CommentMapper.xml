@@ -170,6 +170,13 @@
         where id = #{id}
     </update>
 
+    <update id="update1">
+        update comment
+        <set>
+            content = #{content},
+        </set>
+        where id = #{id}
+    </update>
     <!--通过主键删除-->
     <delete id="deleteById">
         delete from comment where id = #{id}

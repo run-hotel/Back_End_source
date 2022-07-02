@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Service
 public interface RoomTypeService {
-    int updateRoomNumForReduce(String roomtypeno);
+    int updateRoomNumForReduce(Integer roomtypeno);
     int updateRoomNumForAdd(String roomtypeno);
     int updateRoomPrice(@Param("roomprice") float roomPrice,@Param("roomtypeno")String roomtypeno);
     List<RoomType> selectRoomType();

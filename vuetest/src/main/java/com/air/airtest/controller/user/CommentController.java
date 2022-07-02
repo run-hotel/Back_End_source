@@ -43,6 +43,11 @@ public class CommentController {
         System.out.println("123123");
         return ResponseTool.success(this.commentService.queryAllComment1());
     }
+    @GetMapping("/update")
+    public AjaxResult update_comment(Integer id, String content) {
+        System.out.println("123123");
+        return ResponseTool.success(this.commentService.update1(id, content));
+    }
     /**
      * 通过主键查询单条数据
      *

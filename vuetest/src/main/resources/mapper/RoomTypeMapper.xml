@@ -5,9 +5,9 @@
 <mapper namespace="com.air.airtest.mapper.RoomTypeMapper">
     <!-- 用户下订单时，房间状态改为维修时 房间可用数量减1 -->
     <update id="updateRoomNumForReduce">
-        UPDATE roomtype
-        SET roomnumber= roomnumber - 1
-        WHERE roomtypeno = #{roomtypeno}
+        UPDATE room_type
+        SET rest = rest - 1
+        WHERE type_id = #{roomtypeno}
     </update>
     <!-- 用户退房时，房间状态改为空闲时 房间可用数量加1 -->
     <update id="updateRoomNumForAdd">
@@ -28,7 +28,7 @@
     <select id="selectRoomTypeNoforRoomType" resultType="String">
       SELECT roomtypeno
       from roomtype
-      WHERE roomtypename = #{roomtypename} 
+      WHERE roomtypename = #{roomtypename}
     </select>
 
 

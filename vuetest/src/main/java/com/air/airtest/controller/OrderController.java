@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/roomorder")
 public class OrderController {
     //分页查询  -->所有订单和模糊查询
- 
+
     @Autowired
     OrderService orderService;
     @GetMapping("/allorder")
@@ -50,7 +50,7 @@ public class OrderController {
         String a = roomTypeService.selectRoomTypeNoforRoomType(roomOrderInfo.getRoomtypename());
         System.out.println("________"+a);
         //根据房间类型，将相应房间数量减一
-        int b = roomTypeService.updateRoomNumForReduce(a);
+        int b = roomTypeService.updateRoomNumForReduce(Integer.valueOf(a));
         System.out.print("%%%"+b+"$$$$");
 
         return Result.success();

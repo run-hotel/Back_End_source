@@ -1,6 +1,7 @@
 package com.air.airtest.mapper;
 
 import com.air.airtest.entity.Comment;
+import com.air.airtest.entity.Customer;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -61,7 +62,8 @@ public interface CommentMapper {
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
     int insertOrUpdateBatch(@Param("entities") List<Comment> entities);
-
+    int updateById(Comment entity);
+    int update1(Integer id, String content);
     /**
      * 修改数据
      *

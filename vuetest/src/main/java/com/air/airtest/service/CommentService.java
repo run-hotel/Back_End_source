@@ -45,7 +45,7 @@ public interface CommentService {
      * @param comment 实例对象
      * @return 实例对象
      */
-    Comment update(Comment comment);
+    int update1(Integer id, String content);
 
     /**
      * 通过主键删除数据

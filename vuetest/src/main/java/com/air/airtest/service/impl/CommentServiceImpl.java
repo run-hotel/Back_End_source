@@ -33,6 +33,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public int update1(Integer id, String content) {
+        return this.CommentMapper.update1(id, content);
+    }
+    @Override
     public List<Comment> queryById1(Integer id) {
         return  CommentMapper.queryById1(id);
     }
@@ -61,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
         sensitiveFilter.init();
         comment.setContent(sensitiveFilter.filter(comment.getContent()));
         this.CommentMapper.insert(comment);
+        System.out.println(comment.getContent() + "-----------comment-------------"+ comment.getId());
         return comment;
     }
     /**
@@ -69,11 +74,6 @@ public class CommentServiceImpl implements CommentService {
      * @param comment 实例对象
      * @return 实例对象
      */
-    @Override
-    public Comment update(Comment comment) {
-        this.CommentMapper.update(comment);
-        return this.queryById(comment.getId());
-    }
 
     /**
      * 通过主键删除数据

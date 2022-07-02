@@ -19,26 +19,26 @@ public class RoomTypeServiceImpl implements RoomTypeService{
     RoomTypeMapper typeMapper;
 
     @Override
-    public int updateRoomNumForReduce(String roomtypeno) {
-        
+    public int updateRoomNumForReduce(Integer roomtypeno) {
+
         return typeMapper.updateRoomNumForReduce(roomtypeno);
     }
 
     @Override
     public int updateRoomNumForAdd(String roomtypeno) {
-        
+
         return typeMapper.updateRoomNumForAdd(roomtypeno);
     }
 
     @Override
     public int updateRoomPrice(float roomPrice, String roomtypeno) {
-        
+
         return typeMapper.updateRoomPrice(roomPrice, roomtypeno);
     }
 
     @Override
     public List<RoomType> selectRoomType() {
-        
+
         return typeMapper.selectRoomType();
     }
 

@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 @Component
 public interface RoomTypeMapper {
-    int updateRoomNumForReduce(String roomtypeno);
+    int updateRoomNumForReduce(Integer roomtypeno);
     int updateRoomNumForAdd(String roomtypeno);
     int updateRoomPrice(@Param("roomprice") float roomPrice,@Param("roomtypeno")String roomtypeno);
     List<RoomType> selectRoomType();

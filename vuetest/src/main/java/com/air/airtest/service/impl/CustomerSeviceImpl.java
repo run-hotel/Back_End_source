@@ -1,5 +1,6 @@
 package com.air.airtest.service.impl;
 
+import com.air.airtest.entity.Comment;
 import com.air.airtest.entity.Customer;
 import com.air.airtest.mapper.CustomerMapper;
 import com.air.airtest.service.CustomerService;
@@ -72,6 +73,7 @@ public class CustomerSeviceImpl implements CustomerService{
         return 0;
     }
 
+
     @Override
     public int update(Customer entity, Wrapper<Customer> updateWrapper) {
         // TODO Auto-generated method stub
@@ -131,5 +133,5 @@ public class CustomerSeviceImpl implements CustomerService{
         // TODO Auto-generated method stub
         return null;
     }
-    
+
 }

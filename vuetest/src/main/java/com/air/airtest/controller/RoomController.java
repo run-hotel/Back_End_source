@@ -40,9 +40,9 @@ public class RoomController {
         return Result.success(roomPage);
     }
     //每一次注入都需要加@Autowired
-    
+
     //修改房间的状态  将房间可用数量减一
-    //search --> 订单号  ， status --> 所选状态   
+    //search --> 订单号  ， status --> 所选状态
     @GetMapping("/updateRoomStatus")
     public Result<?> updateRoomStatus(@RequestParam(defaultValue = "") String search,@RequestParam(defaultValue = "") String status) {
          //System.out.println("%%%"+search+"$$$$");
@@ -54,7 +54,7 @@ public class RoomController {
             String tyno = roomService.selectRoomTypeNo(search);
             //System.out.print("%%%"+tyno+"$$$$");
             //根据房间类型，将相应房间数量减一
-            roomTypeService.updateRoomNumForReduce(tyno);
+            roomTypeService.updateRoomNumForReduce(Integer.valueOf(tyno));
             //int a =    System.out.print("%%%"+a+"$$$$");
         }else{
             roomService.updateStatusForLive(search);
@@ -63,7 +63,7 @@ public class RoomController {
             //System.out.print("%%%"+tyno+"$$$$");
             //根据房间类型，将相应房间数量加一
             roomTypeService.updateRoomNumForAdd(tyno);
-        } 
+        }
         return Result.success();
     }
     //查询剩余房间
