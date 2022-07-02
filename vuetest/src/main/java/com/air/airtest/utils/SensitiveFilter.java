@@ -4,13 +4,8 @@ import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,22 +18,20 @@ public class SensitiveFilter {
   //根节点
   private TrieNode root = new TrieNode();
 
-  @PostConstruct
   public void init() {
-
-    try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("sensitive-words");
-         BufferedReader reader=new BufferedReader(new InputStreamReader(is));
+    File file = new File("E:\\Desktop\\后端_onlinetest\\Back_End_source\\vuetest\\src\\main\\resources\\sensitive-words.txt");
+//    File file = new File("../../main/resources/sensitive-words.txt");
+    try (InputStreamReader  isr =  new InputStreamReader(new FileInputStream(file), "utf-8");
+         BufferedReader br = new BufferedReader(isr);
     ) {
-      String keyword;
-      while ((keyword=reader.readLine())!=null){
+      String keyword = null;
+      while ((keyword=br.readLine()) != null) {
         //添加到前缀树
-        System.out.println(keyword);
         this.addKeyword(keyword);
       }
     } catch (IOException e) {
       logger.error("加载敏感词文件失败："+e.getMessage());
     }
-
   }
 
 

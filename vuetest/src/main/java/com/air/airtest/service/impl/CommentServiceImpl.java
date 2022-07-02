@@ -33,8 +33,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment queryById1(Integer id) {
-        return this.CommentMapper.queryById1(id);
+    public List<Comment> queryById1(Integer id) {
+        return  CommentMapper.queryById1(id);
     }
    /* *//**
      * 分页查询
@@ -58,11 +58,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment insert(Comment comment) {
         SensitiveFilter sensitiveFilter = new SensitiveFilter();
+        sensitiveFilter.init();
         comment.setContent(sensitiveFilter.filter(comment.getContent()));
         this.CommentMapper.insert(comment);
         return comment;
     }
-
     /**
      * 修改数据
      *

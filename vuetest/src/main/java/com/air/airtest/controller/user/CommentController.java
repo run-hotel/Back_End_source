@@ -68,6 +68,7 @@ public class CommentController {
     @GetMapping("/insert")
     public AjaxResult add(@RequestParam(defaultValue = "1") Integer typeId, @RequestParam(defaultValue = "1") String content , HttpSession session) {
         SensitiveFilter sensitiveFilter = new SensitiveFilter();
+        sensitiveFilter.init();
         Comment comment = new Comment(typeId, sensitiveFilter.filter(content));
         Integer userId = (Integer) session.getAttribute("userId");
         return ResponseTool.success(this.commentService.insert(comment));
