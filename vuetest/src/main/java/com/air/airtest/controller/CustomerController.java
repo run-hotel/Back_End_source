@@ -78,13 +78,13 @@ public class CustomerController {
       customer.setCustomerpassword(CryptUtil.md5(customer.getCustomerpassword()));
     }
     String str1 = GetRandomCharAndNumber(8 );
-    String str2 = getRandomString(8 );
+    String str2 = GetRandomCharAndNumber(8 );
     customer.setCustomerid(str2);
     String name = getRandomString(7);
     tmp.userRegister(str2, customer.getCustomerpassword(),
             name, "男",
             customer.getCustomerphone(),"",
-            "南昌市", str1);
+            "南昌市", str2);
     customerMapper.insert(customer);
 
     return Result.success();

@@ -23,13 +23,13 @@ public class RegisterController {
     WorkerService workerService;
 
     @RequestMapping(method = RequestMethod.POST,value = "/user")
-    public AjaxResult userRegister(
+    public AjaxResult userRegister (
             String username, String password,
             String name,String gender,
             String phone,String email,
-            String address,String idcard){
+            String address,String idcard) {
         User user = new User(phone, password, name, gender, phone, email, address, idcard);
-        user.setUserId(Integer.valueOf(phone));
+        user.setUserId(Integer.valueOf(idcard));
         System.out.println(user);
         int result = userService.insertUser(user);
         if(result == 1) {
@@ -47,7 +47,7 @@ public class RegisterController {
         Worker worker = new Worker(username, password, name, gender, phone, email, address, 0);
         worker.setRole(Role.ADMIN.getValue());
         int result = workerService.insert(worker);
-        if(result == 1){
+        if(result == 1) {
             return ResponseTool.success(result);
         }
         else return ResponseTool.failed("注册失败,请稍后再试");
