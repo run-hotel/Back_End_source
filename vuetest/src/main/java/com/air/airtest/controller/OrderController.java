@@ -2,8 +2,11 @@ package com.air.airtest.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.air.airtest.config.Result;
+import com.air.airtest.entity.Room;
+import com.air.airtest.entity.RoomInfo;
 import com.air.airtest.entity.RoomOrderInfo;
 import com.air.airtest.service.OrderService;
+import com.air.airtest.service.RoomService;
 import com.air.airtest.service.RoomTypeService;
 import com.air.airtest.vo.Hotelvo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -40,12 +43,27 @@ public class OrderController {
     }
     @Autowired
     RoomTypeService roomTypeService;
+    @Autowired
+    private RoomService roomService;
 
     @PostMapping("/xiadan")//
     public Result<?> xiadan(@RequestBody RoomOrderInfo roomOrderInfo){
         //System.out.println(roomOrderInfo);
         // System.out.println(roomOrderInfo);
+        roomOrderInfo.setOrderstatus(0);
         orderService.addOrder(roomOrderInfo);
+        Room tmp = new Room();
+        System.out.println("我在这" + roomOrderInfo.getOrderno() + " " + roomOrderInfo.getRoomtypename() + roomOrderInfo.getCustomerphone());
+        tmp.setRoomId(Integer.parseInt(roomOrderInfo.getOrderno()));
+        tmp.setRoomType("单人房");
+        tmp.setTypeId(1);
+        tmp.setRoomStatus(2);
+        tmp.setRoomPrice(200.0);
+        tmp.setRoomDiscount(25.0);
+        tmp.setCreateTime(roomOrderInfo.getInttime());
+        tmp.setUpdateTime(roomOrderInfo.getOuttime());
+        tmp.setRoomNumber(roomOrderInfo.getOrderno());
+        roomService.insert(tmp);
         //根据房间名,找到房间编号
         String a = roomTypeService.selectRoomTypeNoforRoomType(roomOrderInfo.getRoomtypename());
         System.out.println("________"+a);

@@ -19,7 +19,7 @@ public class SensitiveFilter {
   private TrieNode root = new TrieNode();
 
   public void init() {
-    File file = new File("/Users/smc/Downloads/Back_End_source/vuetest/package-lock.json");
+    File file = new File("E:\\Desktop\\后端_onlinetest\\Back_End_source\\vuetest\\src\\main\\resources\\sensitive-words.txt");
 //    File file = new File("../../main/resources/sensitive-words.txt");
     try (InputStreamReader  isr =  new InputStreamReader(new FileInputStream(file), "utf-8");
          BufferedReader br = new BufferedReader(isr);

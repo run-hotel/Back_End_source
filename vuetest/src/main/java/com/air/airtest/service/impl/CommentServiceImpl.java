@@ -34,7 +34,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int update1(Integer id, String content) {
-        return this.CommentMapper.update1(id, content);
+        SensitiveFilter sensitiveFilter = new SensitiveFilter();
+        sensitiveFilter.init();
+        return this.CommentMapper.update1(id, sensitiveFilter.filter(content));
     }
     @Override
     public List<Comment> queryById1(Integer id) {
