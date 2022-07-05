@@ -42,7 +42,13 @@ public class RoomServiceImpl implements RoomService{
         System.out.println(roomno);
         return roomMapper.updateRoomStatus1(roomno);
     }
-
+    @Override
+    public int updateRoomStatus2(Integer roomno) {
+        // TODO Auto-generated method stub
+        System.out.println("roomno在这");
+        System.out.println(roomno);
+        return roomMapper.updateRoomStatus2(roomno);
+    }
     @Override
     public int updateStatusForRepair(String roomno) {
         // TODO Auto-generated method stub

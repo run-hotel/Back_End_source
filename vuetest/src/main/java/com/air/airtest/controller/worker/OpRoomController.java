@@ -54,7 +54,11 @@ public class OpRoomController {
         roomService.updateRoomStatus1(roomId);
         return ResponseTool.success("更新成功");
     }
-
+    @RequestMapping(method = RequestMethod.GET, value = "/update2")
+    public AjaxResult updateRoom2(@RequestParam(defaultValue = "12") Integer roomId) {
+        roomService.updateRoomStatus2(roomId);
+        return ResponseTool.success("更新成功");
+    }
 
     @RequestMapping(value = "/update")
     public AjaxResult updateRoom(Integer roomId, String roomNumber,

@@ -15,6 +15,7 @@ public interface RoomService {
     List<RoomInfo> selectRoomInfo();
     int updateRoomStatus(String roomno);
     int updateRoomStatus1(Integer roomno);
+    int updateRoomStatus2(Integer roomno);
     int updateStatusForRepair(String roomno);
     int updateStatusForLive(String roomno);
     String selectRoomTypeNo(String roomno);

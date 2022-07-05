@@ -20,6 +20,11 @@
         SET room_status = 3
         WHERE room_number = #{roomno}
     </update>
+    <update id="updateRoomStatus2">
+        UPDATE room_info
+        SET room_status = 1
+        WHERE room_number = #{roomno}
+    </update>
     <!-- 变维修 ->改变房间状态 -->
     <update id="updateStatusForRepair">
       UPDATE room
